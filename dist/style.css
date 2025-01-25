@@ -1,0 +1,19 @@
+.container2 {
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+@media(min-width: 1400px) {
+    .container2 {
+        max-width: 1350px;
+    }
+}
+
+* {
+    outline: none;
+}
+
+textarea:focus {
+    border-color: #027534;
+    background: #ffffff06;
+}
