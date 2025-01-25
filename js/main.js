@@ -28,30 +28,30 @@ const translateBtn = document.getElementById("translateBtn")
 const copyBtn = document.getElementById("copyBtn")
 const loading = document.getElementById("loading")
 const mode = document.getElementById("mode")
+const volumeBtn = document.getElementById("volumeBtn")
 
 mode.addEventListener("click", () => {
-    let body = document.querySelector("body");
+    let body = document.querySelector("body")
     if (mode.classList.contains("bx-moon")) {
-        mode.classList.remove("bx-moon");
-        mode.classList.add("bx-sun");
-        body.style.backgroundColor = "#1a202c"; 
-        firstLanguage.style.color = "#005525";
-        secondLanguage.style.color = "#005525";
-        sourceText.style.color = "";
-        translatedText.style.color = "";
-        copyBtn.style.color = "";
+        mode.classList.remove("bx-moon")
+        mode.classList.add("bx-sun")
+        body.style.backgroundColor = "#1a202c"
+        firstLanguage.style.color = "#005525"
+        secondLanguage.style.color = "#005525"
+        sourceText.style.color = ""
+        translatedText.style.color = ""
+        copyBtn.style.color = ""
     } else {
-        mode.classList.remove("bx-sun");
-        mode.classList.add("bx-moon");
-        body.style.backgroundColor = "white"; 
-        firstLanguage.style.color = "#005525";
-        secondLanguage.style.color = "#005525";
-        sourceText.style.color = "#005525";
-        translatedText.style.color = "#005525";
-        copyBtn.style.color = "#005525";
+        mode.classList.remove("bx-sun")
+        mode.classList.add("bx-moon")
+        body.style.backgroundColor = "white"
+        firstLanguage.style.color = "#005525"
+        secondLanguage.style.color = "#005525"
+        sourceText.style.color = "#005525"
+        translatedText.style.color = "#005525"
+        copyBtn.style.color = "#005525"
     }
-});
-
+})
 
 Object.keys(languages).forEach((key) => {
     const option = document.createElement("option")
@@ -111,3 +111,14 @@ copyBtn.addEventListener("click", () => {
     translatedText.setSelectionRange(0, 99999)
     navigator.clipboard.writeText(translatedText.value)
 })
+
+
+volumeBtn.addEventListener("click", () => {
+    const textToSpeak = translatedText.value; 
+    if (textToSpeak.trim().length === 0) {
+        return;
+    }
+    const utterance = new SpeechSynthesisUtterance(textToSpeak);
+    utterance.lang = secondLanguage.value; 
+    window.speechSynthesis.speak(utterance);
+});
